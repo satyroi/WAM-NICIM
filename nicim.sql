@@ -1,4 +1,4 @@
-----------ITEM_MASTER----------
+----------INTERF_PARTI(ITEM_MASTER)----------
 select t1.part,t1.vendor,t1.quodate,t1.descshort as lt,ltrim(rtrim(substring(description,5,len(description)))) as eoq,left(description,3) as pre into #pricelist from
 u8m_wx..ven10110 t1,
 (select max(t1.vendor)vendor,t1.part,t1.quodate from u8m_wx..ven10110 t1,
@@ -59,7 +59,7 @@ select * from #t;
 drop table #pricelist;
 drop table #t;
 
-----------BOM----------
+----------INTERF_DIBA(BOM)----------
 select IDENTITY(INT,1,1) as seq,
 parent as db_copd,
 component as db_cofi,
@@ -72,7 +72,7 @@ insert into INTERF_DIBA(db_serial,db_copd,db_cofi,db_qtau)
 select * from #t;
 drop table #t;
 
-----------HEADER_CUST_ORD----------
+----------INTERF_OCTE(HEADER_CUST_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 t.ot_code,
 t.ot_clie,
@@ -94,7 +94,7 @@ insert into INTERF_OCTE(ot_serial,ot_code,ot_clie,ot_decl)
 select * from #t;
 drop table #t;
 
-----------DETAIL_CUST_ORD----------
+----------INTERF_OCDE(DETAIL_CUST_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 t.oc_code,
 t.oc_riga,
@@ -134,7 +134,7 @@ insert into INTERF_OCDE(oc_serial,oc_code,oc_riga,oc_item,oc_qtor,oc_qtev,oc_umq
 select * from #t;
 drop table #t;
 
-----------HEADER_SUPP_ORD----------
+----------INTERF_OFTE(HEADER_SUPP_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 t.of_code,
 t.of_forn,
@@ -156,7 +156,7 @@ insert into INTERF_OFTE(of_serial,of_code,of_forn,of_defo)
 select * from #t;
 drop table #t;
 
-----------DETAIL_SUPP_ORD----------
+----------INTERF_OFDE(DETAIL_SUPP_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 t.od_code,
 t.od_riga,
@@ -198,7 +198,7 @@ insert into INTERF_OFDE(od_serial,od_code,od_riga,od_item,od_qtor,od_qtev,od_umq
 select * from #t;
 drop table #t;
 
-----------HEADER_PROD_ORD----------
+----------INTERF_ODL(HEADER_PROD_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 no+'-'+convert(varchar,seq) as ol_odlp,
 nicim.dbo.RemoveCharCN(part) as ol_item,
@@ -215,7 +215,7 @@ insert into INTERF_ODL(ol_serial,ol_odlp,ol_item,ol_cmve,ol_qtao,ol_dtin,ol_dtfi
 select * from #t;
 drop table #t;
 
-----------DETAIL_PROD_ORD----------
+----------INTERF_BOM(DETAIL_PROD_ORD)----------
 select IDENTITY(INT,1,1) as seq,
 mono+'-'+convert(varchar,moseq) as mo_odlp,
 t1.part as mo_item,
@@ -229,7 +229,7 @@ insert into INTERF_BOM(mo_serial,mo_odlp,mo_item,mo_dtmo,mo_qtaf)
 select * from #t;
 drop table #t;
 
-----------STOCK----------
+----------INTERF_GIAC(STOCK)----------
 select IDENTITY(INT,1,1) as seq,
 t.gi_item,
 gi_lott,
@@ -260,7 +260,7 @@ update INTERF_GIAC set GI_LOTT='TCKSB0398-1' where GI_ITEM='ES2730950C03933' and
 update INTERF_GIAC set GI_LOTT='TCHRB0063-10' where GI_ITEM='FNC4J44VA00257' and GI_QTAG='1.0000';
 update INTERF_GIAC set GI_LOTT=null where GI_ITEM in ('XEA273P1AA0179','XEB273P1AA0197');
 
-----------SUPP_MASTER----------
+----------INTERF_FOR(SUPP_MASTER)----------
 select IDENTITY(INT,1,1) as seq,
 vendor as fo_cocl,
 nicim.dbo.RemoveCharCN(userdef1) as fo_rags,
@@ -272,7 +272,7 @@ insert into INTERF_FOR(fo_serial,fo_cocl,fo_rags,fo_cu01)
 select * from #t;
 drop table #t;
 
-----------CUST_MASTER----------
+----------INTERF_CLI(CUST_MASTER)----------
 select IDENTITY(INT,1,1) as seq,
 t.cl_cocl,
 t.cl_rags
